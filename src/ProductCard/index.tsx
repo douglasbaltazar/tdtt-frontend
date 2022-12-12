@@ -5,15 +5,12 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Product from "../../types/Product";
 
 type Props = {
-    id?: string;
-    imgCover?: string;
-    productName?: string;
-    newPrice?: string;
-    link?: string;
+    product?: Product;
 };
-export default function ProductCard({ id, imgCover, productName, newPrice, link }: Props) {
+export default function ProductCard({ product }: Props) {
     return (
         <Card sx={{ maxWidth: 315, borderRadius: 1 }}>
             <CardMedia
@@ -34,7 +31,12 @@ export default function ProductCard({ id, imgCover, productName, newPrice, link 
                 </Typography>
             </CardContent>
             <CardActions sx={{ paddingX: 4 }}>
-                <Button size="small" color="error" variant="contained" fullWidth >
+                <Button
+                    size="small"
+                    color="error"
+                    variant="contained"
+                    fullWidth
+                >
                     Ir à Loja
                 </Button>
             </CardActions>

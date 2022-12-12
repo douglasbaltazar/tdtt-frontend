@@ -1,8 +1,20 @@
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
+import { Container } from "@mui/system";
+import Box from '@mui/material/Box'
+
+// import { useTheme } from '@mui/material/styles';
+
+import OfferProductCard from "../../src/OfferProductCard";
+import OfferProductAdditionalInfo from "../../src/OfferProductAdditionalInfo";
 
 export default function PostPage() {
     const router = useRouter();
     return (
-        <h1>Oferta {router.query.id} </h1>
-    )
+        <Container maxWidth="lg" sx={{ paddingTop: 2 }}>
+            <Box>
+                <OfferProductCard />
+                <OfferProductAdditionalInfo />
+            </Box>
+        </Container>
+    );
 }

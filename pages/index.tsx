@@ -2,7 +2,6 @@ import Head from "next/head";
 
 import ProductList from "../src/ProductList";
 
-
 export default function Home() {
     return (
         <>
@@ -11,7 +10,7 @@ export default function Home() {
                 <meta name="description" content="Tem de tudo Tchelo" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            
+
             <ProductList />
         </>
     );
