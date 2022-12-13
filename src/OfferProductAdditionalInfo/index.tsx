@@ -2,8 +2,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Product from "../../types/Product";
 
-export default function OfferProductAdditionalInfo() {
+type Props = {
+    product: Product;
+};
+export default function OfferProductAdditionalInfo({ product }: Props) {
     return (
         <Card sx={{ display: "flex", marginTop: 4 }} elevation={5}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -13,8 +17,7 @@ export default function OfferProductAdditionalInfo() {
                     </Typography>
 
                     <Typography component="div" variant="body2">
-                        ❤️ R$ 3.919,99 pagando através da AME <br />
-                        👉 Valor pode alterar a qualquer momento
+                        {product.additionalInfo}
                     </Typography>
                 </CardContent>
             </Box>

@@ -2,8 +2,14 @@ import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ProductCard from "../ProductCard";
+import Product from "../../types/Product";
+import EmptyProducts from "../EmptyProducts";
 
-export default function ProductList() {
+type Props = {
+    productList: Product[];
+};
+export default function ProductList({ productList }: Props) {
+    // console.log(productList);
     return (
         <Container maxWidth="lg" sx={{ paddingTop: 2 }}>
             <Typography
@@ -14,18 +20,15 @@ export default function ProductList() {
                 Ultimas Ofertas
             </Typography>
             <Grid container spacing={1}>
-                <Grid item xs={4}>
-                    <ProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                    <ProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                    <ProductCard />
-                </Grid>
-                <Grid item xs={4}>
-                    <ProductCard />
-                </Grid>
+                {productList && productList.length > 0 ? (
+                    productList.map((product: Product) => (
+                        <Grid item xs={4} key={product.id}>
+                            <ProductCard product={product} />
+                        </Grid>
+                    ))
+                ) : (
+                    <EmptyProducts />
+                )}
             </Grid>
         </Container>
     );

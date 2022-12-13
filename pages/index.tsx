@@ -1,8 +1,22 @@
+import { GetServerSideProps, GetStaticProps } from 'next'
 import Head from "next/head";
 
 import ProductList from "../src/ProductList";
-
-export default function Home() {
+import Product from '../types/Product';
+export const getStaticProps: GetServerSideProps = async () => {
+    const data = await fetch('http://localhost:8081/api/v1/products/')
+    const products: Product[] = await data.json()
+    // console.log(products);
+    if(!products) {
+        return {
+            notFound: true,
+        };
+    }
+    return {
+        props: { products }
+    }
+}
+export default function Home({products}: { products: Product[]}) {
     return (
         <>
             <Head>
@@ -11,7 +25,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <ProductList />
+            <ProductList productList={products} />
         </>
     );
 }
