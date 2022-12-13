@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Box from "@mui/material/Box";
 import OfferProductAdditionalInfo from "../OfferProductAdditionalInfo";
+import Link from "next/link";
 
 export default function OfferProductCard() {
     return (
@@ -37,7 +38,6 @@ export default function OfferProductCard() {
                         >
                             R$ 3000,00 em 8x
                         </Typography>
-                        
                     </CardContent>
                     <Box
                         sx={{
@@ -66,18 +66,19 @@ export default function OfferProductCard() {
                             </IconButton>
                         </Box>
                         <Box sx={{ flexGrow: 1, marginLeft: 12 }}>
-                            <Button
-                                size="small"
-                                color="error"
-                                variant="contained"
-                            >
-                                Ir à Loja
-                            </Button>
+                            <Link href={"/ofertas/1"}>
+                                <Button
+                                    size="small"
+                                    color="error"
+                                    variant="contained"
+                                >
+                                    Ir à Loja
+                                </Button>
+                            </Link>
                         </Box>
                     </Box>
                 </Box>
             </Card>
-            
         </>
     );
 }

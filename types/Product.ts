@@ -4,4 +4,5 @@ export default interface Product {
     productName: string;
     newPrice: string;
     link: string;
+    additionalInfo: string;
 }

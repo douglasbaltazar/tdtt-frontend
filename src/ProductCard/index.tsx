@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Product from "../../types/Product";
+import Link from "next/link";
 
 type Props = {
     product?: Product;
@@ -31,14 +32,16 @@ export default function ProductCard({ product }: Props) {
                 </Typography>
             </CardContent>
             <CardActions sx={{ paddingX: 4 }}>
-                <Button
-                    size="small"
-                    color="error"
-                    variant="contained"
-                    fullWidth
-                >
-                    Ir à Loja
-                </Button>
+                <Link href={"/ofertas/1"}>
+                    <Button
+                        size="small"
+                        color="error"
+                        variant="contained"
+                        fullWidth
+                    >
+                        Ir à Loja
+                    </Button>
+                </Link>
             </CardActions>
             <Box display="flex">
                 <Box sx={{ flexGrow: 1 }} />
