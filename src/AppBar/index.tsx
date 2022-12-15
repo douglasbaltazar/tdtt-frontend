@@ -12,20 +12,26 @@ export default function NavBar() {
         <AppBar position="static" color="inherit">
             <Toolbar>
                 <Box sx={{ flexGrow: 1 }}>
-                    <Link href={"/"}>
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            
-                            color="error"
-                        >
+                    <Link href={"/"} style={{ display: "flex" }}>
+                        <Box
+                            component="img"
+                            src="logo.jpg"
+                            sx={{
+                                width: "35px",
+                                marginRight: 1,
+                                borderRadius: "50%",
+                            }}
+                        />
+                        <Typography variant="h6" component="div" color="error">
                             Tem de Tudo Tchelo
                         </Typography>
                     </Link>
                 </Box>
-                <Button color="error" variant="contained">
-                    Grupo de Ofertas
-                </Button>
+                <Link href="https://bit.ly/temdetudotchelo">
+                    <Button color="error" variant="contained">
+                        Grupo de Ofertas
+                    </Button>
+                </Link>
             </Toolbar>
         </AppBar>
     );

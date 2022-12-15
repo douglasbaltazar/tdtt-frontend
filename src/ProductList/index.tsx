@@ -19,7 +19,7 @@ export default function ProductList({ productList }: Props) {
             >
                 Ultimas Ofertas
             </Typography>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} sx={{ paddingTop: 2}}>
                 {productList && productList.length > 0 ? (
                     productList.map((product: Product) => (
                         <Grid item xs={4} key={product.id}>

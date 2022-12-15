@@ -5,23 +5,28 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Product from "../../types/Product";
+import { Product } from "../../types/Product";
 import Link from "next/link";
+import { CardActionArea } from "@mui/material";
+import { diffMinutes } from "../../utils/utils";
 
 type Props = {
     product: Product;
 };
 export default function ProductCard({ product }: Props) {
     return (
-        <Link href={`ofertas/${product.id}`}>
-            <Card sx={{ maxWidth: 315, borderRadius: 1 }}>
+        <Card sx={{ maxWidth: 315, borderRadius: 1, minHeight: "450px" }}>
+            <CardActionArea LinkComponent={Link} href={`ofertas/${product.id}`}>
                 <CardMedia
                     component="img"
+                    sx={{
+                        objectFit: 'contain'
+                    }}
                     alt={product.productName}
                     height="140"
                     image={product.imgCover}
                 />
-                <CardContent>
+                <CardContent sx={{ height: "100%" }}>
                     <Typography gutterBottom variant="h6" component="div">
                         {product.productName}
                     </Typography>
@@ -35,29 +40,30 @@ export default function ProductCard({ product }: Props) {
                         })}
                     </Typography>
                 </CardContent>
-                <CardActions sx={{ paddingX: 4 }}>
-                    <Link href={`${product.link}`}>
-                        <Button
-                            size="small"
-                            color="error"
-                            variant="contained"
-                            fullWidth
-                        >
-                            Ir à Loja
-                        </Button>
-                    </Link>
-                </CardActions>
-                <Box display="flex">
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Typography
-                        sx={{ padding: 1 }}
-                        fontSize={10}
-                        justifyContent={"flex-end"}
+            </CardActionArea>
+            <CardActions sx={{ paddingX: 4, alignItems: 'flex-end', margin: 'auto' }} >
+                <Link href={`${product.link}`}>
+                    <Button
+                        size="small"
+                        color="error"
+                        variant="contained"
+                        fullWidth
                     >
-                        Há X minutos
-                    </Typography>
-                </Box>
-            </Card>
-        </Link>
+                        Ir à Loja
+                    </Button>
+                </Link>
+            </CardActions>
+            <Box display="flex">
+                <Box sx={{ flexGrow: 1 }} />
+                <Typography
+                    sx={{ padding: 1 }}
+                    fontSize={10}
+                    fontWeight={700}
+                    justifyContent={"flex-end"}
+                >
+                    {diffMinutes(product.created_at)}
+                </Typography>
+            </Box>
+        </Card>
     );
 }
