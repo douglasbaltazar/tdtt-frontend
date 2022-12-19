@@ -74,13 +74,6 @@ const columns: Column[] = [
 ];
 
 function createData(product: Product): Product {
-    // id: string;
-    // imgCover: string;
-    // productName: string;
-    // newPrice: number;
-    // link: string;
-    // additionalInfo: string;
-    // created_at: string;
     return {
         ...product,
     };
