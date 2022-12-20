@@ -5,10 +5,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Product } from "../../types/Product";
+import { Product } from "../../../types/Product";
 import Link from "next/link";
 import { CardActionArea } from "@mui/material";
-import { diffMinutes } from "../../utils/utils";
+import { diffMinutes } from "../../../utils/utils";
 
 type Props = {
     product: Product;

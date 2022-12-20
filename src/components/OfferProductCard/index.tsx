@@ -8,7 +8,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Box from "@mui/material/Box";
 import OfferProductAdditionalInfo from "../OfferProductAdditionalInfo";
 import Link from "next/link";
-import Product from "../../types/Product";
+import { Product } from "types/Product";
 import { Chip } from "@mui/material";
 import { green } from "@mui/material/colors";
 

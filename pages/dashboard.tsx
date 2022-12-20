@@ -13,12 +13,14 @@ import { Box, Container } from "@mui/system";
 import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Product } from "../types/Product";
-import CreateProductDialog from "../src/CreateProductDialog";
+import CreateProductDialog from "../src/dialogs/CreateProductDialog";
+import { IconButton } from "@mui/material";
+import UpdateProductDialog from "src/dialogs/UpdateProductDialog";
 
 interface Column {
-    // id: "name" | "code" | "population" | "size" | "density";
     id:
         | "id"
         | "productName"
@@ -73,11 +75,7 @@ const columns: Column[] = [
     },
 ];
 
-function createData(product: Product): Product {
-    return {
-        ...product,
-    };
-}
+
 
 export const getStaticProps: GetServerSideProps = async () => {
     const data = await fetch("http://localhost:8081/api/v1/products/");
@@ -96,19 +94,27 @@ export const getStaticProps: GetServerSideProps = async () => {
 export default function Dashboard({ products }: { products: Product[] }) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [productEdit, setProductEdit] = useState<Product>();
     const [openDialog, setOpenDialog] = useState(false);
-    const [data, setData] = useState<Array<Product>>(products);
+    const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+    const [data, setData] = useState<Array<Product>>([]);
     const handleCloseDialog = () => {
-        setOpenDialog(!open);
+        setOpenDialog(!openDialog);
+    };
+    const handleCloseUpdateDialog = () => {
+        setOpenUpdateDialog(!openUpdateDialog);
     };
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
-    // useEffect(() => {
-    //     products.map((product: Product) => {
-    //         data.push(product);
-    //     });
-    // }, [data]);
+    useEffect(() => {
+        async function fetchData() {
+            const data = await fetch("http://localhost:8081/api/v1/products/");
+            const products: Product[] = await data.json();
+            setData(products);
+        }
+        fetchData();
+    }, [data]);
 
     const handleChangeRowsPerPage = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -122,6 +128,11 @@ export default function Dashboard({ products }: { products: Product[] }) {
             <CreateProductDialog
                 open={openDialog}
                 handleClose={handleCloseDialog}
+            />
+            <UpdateProductDialog 
+                open={openUpdateDialog}
+                handleClose={handleCloseUpdateDialog}
+                product={productEdit}
             />
             <Box>
                 <Box sx={{ display: "flex", flexGrow: 1 }}>
@@ -151,6 +162,14 @@ export default function Dashboard({ products }: { products: Product[] }) {
                                             {column.label}
                                         </TableCell>
                                     ))}
+                                    <TableCell
+                                        align="center"
+                                        style={{
+                                            minWidth: "50px",
+                                        }}
+                                    >
+                                        Ações
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -185,6 +204,70 @@ export default function Dashboard({ products }: { products: Product[] }) {
                                                         </TableCell>
                                                     );
                                                 })}
+                                                <TableCell>
+                                                    <Box
+                                                        sx={{ display: "flex" }}
+                                                    >
+                                                        <IconButton
+                                                            aria-label="update"
+                                                            sx={{
+                                                                borderRadius:
+                                                                    "20px",
+                                                                minWidth:
+                                                                    "40px",
+                                                                display: "flex",
+                                                                alignItems:
+                                                                    "center",
+                                                                justifyContent:
+                                                                    "center",
+                                                                color: "black",
+                                                                transition:
+                                                                    "0.2s",
+                                                                ":hover": {
+                                                                    transform:
+                                                                        "scale(1.15)",
+                                                                    backgroundColor:
+                                                                        "rgba(0, 120, 0, 1)",
+                                                                    color: 'white'
+                                                                },
+                                                            }}
+                                                            onClick={ () => {
+                                                                setProductEdit(data);
+                                                                setOpenUpdateDialog(true);
+                                                            }}
+                                                        >
+                                                            <EditIcon />
+                                                        </IconButton>
+                                                        <IconButton
+                                                            aria-label="delete"
+                                                            onClick={ () => console.log('delete ' + data.id)}
+                                                            sx={{
+                                                                borderRadius:
+                                                                    "20px",
+                                                                minWidth:
+                                                                    "40px",
+                                                                display: "flex",
+                                                                alignItems:
+                                                                    "center",
+                                                                justifyContent:
+                                                                    "center",
+                                                                color: "black",
+                                                                marginLeft: '5px',
+                                                                transition:
+                                                                    "0.2s",
+                                                                ":hover": {
+                                                                    transform:
+                                                                        "scale(1.15)",
+                                                                    backgroundColor:
+                                                                        "rgba(130, 0, 0, 1)",
+                                                                    color: "white"
+                                                                },
+                                                            }}
+                                                        >
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Box>
+                                                </TableCell>
                                             </TableRow>
                                         );
                                     })}

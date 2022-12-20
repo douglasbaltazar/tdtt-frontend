@@ -1,7 +1,7 @@
 import { GetServerSideProps, GetStaticProps } from "next";
 import Head from "next/head";
 import Carousel from "react-material-ui-carousel"
-import ProductList from "../src/ProductList";
+import ProductList from "../src/components/ProductList";
 import { Product } from "../types/Product";
 import { Paper, Button } from '@mui/material'
 import Image from "next/image";

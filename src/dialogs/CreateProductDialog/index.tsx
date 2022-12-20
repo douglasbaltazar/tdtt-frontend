@@ -8,11 +8,12 @@ import * as Yup from "yup";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import { useFormik } from "formik";
-import { IAddProduct } from "../../types/Product";
+import { IAddProduct } from "../../../types/Product";
 import axios from "axios";
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
 import { useState } from 'react'
+import { useRouter } from "next/router";
 
 type Props = {
     open: boolean;

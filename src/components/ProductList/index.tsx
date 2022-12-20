@@ -2,7 +2,7 @@ import { Container } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ProductCard from "../ProductCard";
-import { Product } from "../../types/Product";
+import { Product } from "../../../types/Product";
 import EmptyProducts from "../EmptyProducts";
 
 type Props = {

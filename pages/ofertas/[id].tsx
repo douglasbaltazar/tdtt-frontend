@@ -4,8 +4,8 @@ import Box from "@mui/material/Box";
 
 // import { useTheme } from '@mui/material/styles';
 
-import OfferProductCard from "../../src/OfferProductCard";
-import OfferProductAdditionalInfo from "../../src/OfferProductAdditionalInfo";
+import OfferProductCard from "../../src/components/OfferProductCard";
+import OfferProductAdditionalInfo from "../../src/components/OfferProductAdditionalInfo";
 import { GetServerSideProps } from "next";
 import { Product } from "../../types/Product";
 
